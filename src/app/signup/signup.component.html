@@ -1,0 +1,64 @@
+<div class="container-fluid d-flex" style="margin-top: 50px; margin-left: 400px; height: 525px; width: 720px; background-color: antiquewhite;">
+    <div>
+        <img src="assets/signupbgimg.svg" alt="" style="margin-top: 5px;">
+        <h1 style="margin-top: -500px; color: aliceblue; margin-left: 10px;">Unlock the</h1>
+        <h1 style="margin-top: -25px; color: aliceblue; margin-left: 10px;">Smarter Way to Travel</h1>
+    </div>
+    <div style="margin-left: 40px;">
+        <h1 style="color: red; margin-top: 20px;">Sign in to avail exciting</h1>
+        <h1 style="color: red;">discounts and cashbacks!!</h1>
+        <form (ngSubmit)="Adddetails(registrationForm.value)" [formGroup]="registrationForm">
+            <dl>
+                <dt>First Name</dt>
+                <dd>
+                    <input type="text" class="form-control" name="firstName" formControlName="firstName">
+                    <div *ngIf="registrationForm.controls['firstName'].invalid && (registrationForm.controls['firstName'].dirty || registrationForm.controls['firstName'].touched)" class="text-danger">
+                        <div *ngIf="registrationForm.controls['firstName'].errors?.['required']">First Name is required.</div>
+                        <div *ngIf="registrationForm.controls['firstName'].errors?.['minlength']">First Name must be at least 4 characters long.</div>
+                        <div *ngIf="registrationForm.controls['firstName'].errors?.['maxlength']">First Name cannot be more than 12 characters long.</div>
+                    </div>
+                </dd>
+
+                <dt>Last Name</dt>
+                <dd>
+                    <input type="text" class="form-control" name="lastName" formControlName="lastName">
+                    <div *ngIf="registrationForm.controls['lastName'].invalid && (registrationForm.controls['lastName'].dirty || registrationForm.controls['lastName'].touched)" class="text-danger">
+                        <div *ngIf="registrationForm.controls['lastName'].errors?.['required']">Last Name is required.</div>
+                        <div *ngIf="registrationForm.controls['lastName'].errors?.['minlength']">Last Name must be at least 4 characters long.</div>
+                        <div *ngIf="registrationForm.controls['lastName'].errors?.['maxlength']">Last Name cannot be more than 12 characters long.</div>
+                    </div>
+                </dd>
+
+                <dt>Username</dt>
+                <dd>
+                    <input type="text" class="form-control" name="userName" formControlName="userName" (keyup)="VerifyUser($event)">
+                    <div *ngIf="registrationForm.controls['userName'].invalid && (registrationForm.controls['userName'].dirty || registrationForm.controls['userName'].touched)" class="text-danger">
+                        <div *ngIf="registrationForm.controls['userName'].errors?.['required']">Username is required.</div>
+                        <div *ngIf="registrationForm.controls['userName'].errors?.['minlength']">Username must be at least 4 characters long.</div>
+                        <div *ngIf="registrationForm.controls['userName'].errors?.['maxlength']">Username cannot be more than 12 characters long.</div>
+                    </div>
+                    <div [ngClass]="{'text-danger': isInvalid, 'text-success': !isInvalid}">{{ UserError }}</div>
+                </dd>
+
+                <dt>Age</dt>
+                <dd>
+                    <input type="number" class="form-control" name="age" formControlName="age">
+                    <div *ngIf="registrationForm.controls['age'].invalid && (registrationForm.controls['age'].dirty || registrationForm.controls['age'].touched)" class="text-danger">
+                        <div *ngIf="registrationForm.controls['age'].errors?.['required']">Age is required.</div>
+                        <div *ngIf="registrationForm.controls['age'].errors?.['min']">Age must be at least 18.</div>
+                        <div *ngIf="registrationForm.controls['age'].errors?.['max']">enter Valid age.</div>
+                    </div>
+                </dd>
+
+                <dt>Password</dt>
+                <dd>
+                    <input type="password" class="form-control" name="password" formControlName="password">
+                    <div *ngIf="registrationForm.controls['password'].invalid && (registrationForm.controls['password'].dirty || registrationForm.controls['password'].touched)" class="text-danger">
+                        <div *ngIf="registrationForm.controls['password'].errors?.['required']">Password is required.</div>
+                    </div>
+                </dd>
+            </dl>
+            <button class="btn btn-danger" style="margin-left: 200px;" type="submit" [disabled]="registrationForm.invalid">Register</button>
+        </form>
+    </div>
+</div>

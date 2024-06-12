@@ -1,0 +1,187 @@
+<div class="main-container">
+  <div class="upper-div">
+    <div class="logo-section">
+      <img src="assets/busimagebgremove.png" alt="Bus Logo">
+      <h1>Prasanna Bus</h1>
+    </div>
+    <p *ngIf="username">Hello, {{ username }}!</p>
+    <div class="help-section" style="margin-left: 300px; margin-top: -10px;">
+      <a>
+        <img src="assets/coustemercare.jpg" alt="Customer Care">
+        <p style="margin-top: -25px; margin-left: 30px;">Help</p>
+      </a>
+    </div>
+    <div class="login-section">
+      <div class="dropdown">
+        <button class="dropbtn" style="border-radius: 50px;">User</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/login']">Login</a>
+          <a [routerLink]="['/signup']">SignUp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-bar-background" style="background-image: url(assets/backgroundsearch.jpg);">
+    <div class="search-bar">
+      <div class="search-field from-field">
+        <i class="bi bi-bus-front"></i>
+        <input type="text" placeholder="From" [(ngModel)]="from">
+      </div>
+      <div class="switch-field">
+        <button class="btn" (click)="switch()"><i class="bi bi-arrow-left-right"></i></button>
+      </div>
+      <div class="search-field to-field">
+        <i class="bi bi-bus-front"></i>
+        <input type="text" placeholder="To" [(ngModel)]="to">
+      </div>
+      <div class="search-field date-field">
+        <i class="bi bi-calendar3"></i>
+        <input type="date" [(ngModel)]="date">
+      </div>
+      <a [routerLink]="['/search']"><button class="search-button" (click)="searchBuses()">SEARCH BUSES</button></a>
+    </div>
+  </div>
+
+  <div class="offers-section">
+    <h1>TRENDING OFFERS</h1>
+    <div class="offers">
+      <div class="offer">
+        <img src="assets/firstoffer.png" alt="First Offer">
+        <div class="offer-details">
+          <h4>BUS</h4>
+          <h3>Save up to Rs 250 on bus tickets</h3>
+          <h3>of each</h3>
+          <p>valid till 31 july</p>
+          <h4>FIRST</h4>
+        </div>
+      </div>
+      <div class="offer1">
+        <img src="assets/superhitoffer.png" alt="Superhit Offer">
+        <div class="offer-details">
+          <h4>BUS</h4>
+          <h3>Save up to Rs 250 on bus AP TS</h3>
+          <h3>Routes</h3>
+          <p>valid till 31 july</p>
+          <h4>FIRST</h4>
+        </div>
+      </div>
+      <div class="offer2">
+        <img src="assets/charteredoffer.png" alt="Chartered Offer">
+        <div class="offer-details">
+          <h4>BUS</h4>
+          <h3>Save up to Rs 250 on bus tickets</h3>
+          <h3>on chartered bus</h3>
+          <p>valid till 31 July</p>
+          <h4>FIRST</h4>
+        </div>
+      </div>
+      <div class="offer3">
+        <img src="assets/APSRTCoffer.png" alt="APSRTC Offer">
+        <div class="offer-details">
+          <h4>BUS</h4>
+          <h3>Save up to Rs 300 on bus tickets</h3>
+          <h3>APSRTC bus</h3>
+          <p>valid till 31 July</p>
+          <h4>FIRST</h4>
+        </div>
+      </div>
+      <div class="offer4">
+        <img src="assets/Sri-Krishnaoffer.png" alt="Offer 5">
+        <div class="offer-details">
+          <h4>BUS</h4>
+          <h3>Save up to Rs 350 on bus tickets</h3>
+          <h3>on Sri Krishna bus</h3>
+          <p>valid till 31 July</p>
+          <h4>FIRST</h4>
+        </div>
+      </div>
+      <div class="offer5">
+        <img src="assets/V-Kaverioffer.png" alt="Offer 6">
+        <div class="offer-details">
+          <h4>BUS</h4>
+          <h3>Save up to Rs 300 on bus tickets</h3>
+          <h3>V Karveri bus</h3>
+          <p>valid till 31 July</p>
+          <h4>FIRST</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="height: 300px;"></div>
+<div class="container">
+  <h1>BOOK BUS TICKETS ONLINE</h1>
+  <p>redBus is India's largest brand for online bus ticket booking and offers an easy-to-use online bus ticket booking service and train; with over 36 million satisfied customers, 3500+ bus operators to choose from, and plenty of offers on bus ticket booking, redBus makes road journeys super convenient for travellers. A leading platform for booking bus tickets, redBus has been the leader in online bus booking over the past 17 years across thousands of cities and lakhs of routes in India.</p>
+  <p>Booking a bus ticket online on the redBus app or website is very simple. You can download the redBus app or visit redbus.in and enter your source, destination & travel date to check the top-rated bus services available. You can then compare bus prices, user ratings & amenities, select your preferred seat, boarding & dropping points and pay using multiple payment options like UPI, debit or credit card, net banking and more. With redBus, get assured safe & secure payment methods and guaranteed travel with the best seat and bus operator of your choice. Once the bus booking payment is confirmed, all you have to do is pack your bags and get ready to travel with the m-ticket, which you can show to the bus operator on your mobile before boarding the bus. Online bus ticket booking with redBus is that simple!</p>
+  <p>redBus also offers other exclusive benefits on online bus tickets like flexible ticket rescheduling options, easy & friendly cancellation policies, and instant payment refunds. With a live bus tracking feature, you can plan travel and never miss the bus. You can get the cheapest bus tickets by availing the best discounts for new & existing customers. With redDeals, you can also get exclusive & additional discounts on your online bus ticket booking. You will get 24/7 customer support on call, chat & help to resolve all your queries in English & local languages.</p>
+  <p>redBus offers Primo bus services, specially curated by redBus with highly rated buses and best-in-class service. With Primo by redBus, you can be assured of safe, comfortable, and on-time bus service at no additional cost. With multiple boarding and dropping points available across all major cities in India, you can select at your convenience and enjoy a smooth travel experience.</p>
+  <p>redBus operates in six countries, including India, Malaysia, Singapore, Indonesia, Peru, and Colombia. Through its website and app, it has sold over 220 million bus tickets worldwide. With over 36 million satisfied customers, redBus is committed to providing its users with a world-class online bus booking experience.</p>
+  <p>redBus offers bus tickets from some of the top private bus operators, such as Orange Travels, VRL Travels, SRS Travels, Chartered Bus, and Praveen Travels, and state government bus operators, such as APSRTC, TSRTC, GSRTC, Kerala RTC, TNSTC, RSRTC, UPSRTC, and more. With redBus, customers can easily book bus tickets for different bus types, such as AC/non-AC, Sleeper, Seater, Volvo, Multi-axle, AC Sleeper, Electric buses, and more.</p>
+  <hr>
+  <div class="d-flux">
+    <div class="section" style="width: 200px;">
+      <img src="assets/busimagebgremove.png" alt="Bus Logo" height="100px" width="100px">
+      <p>redBus is the world's largest online bus ticket booking service trusted by over 25 million happy customers globally. redBus offers bus ticket booking through its website, iOS and Android mobile apps for all major routes.</p>
+    </div>
+    <div class="section">
+      <h2>About redBus</h2>
+      <ul>
+        <li>About us</li>
+        <li>Investor Relations</li>
+        <li>Contact us</li>
+        <li>Mobile version</li>
+        <li>redBus on mobile</li>
+        <li>Sitemap</li>
+        <li>Offers</li>
+        <li>Careers</li>
+        <li>Values</li>
+      </ul>
+    </div>
+    <div class="section">
+      <h2>Info</h2>
+      <ul>
+        <li>T&C</li>
+        <li>Privacy policy</li>
+        <li>FAQ</li>
+        <li>Blog</li>
+        <li>Bus operator registration</li>
+        <li>Agent registration</li>
+        <li>Insurance partner</li>
+        <li>User agreement</li>
+        <li>Primo Bus</li>
+        <li>Bus Timetable</li>
+      </ul>
+    </div>
+    <div class="section">
+      <h2>Global Sites & Partners</h2>
+      <ul>
+        <li><strong>Global Sites</strong></li>
+        <ul>
+          <li>India</li>
+          <li>Singapore</li>
+          <li>Malaysia</li>
+          <li>Indonesia</li>
+          <li>Peru</li>
+          <li>Colombia</li>
+          <li>Cambodia</li>
+          <li>Vietnam</li>
+        </ul>
+      </ul>
+    </div>
+    <div class="section" style="margin-top: -490px; margin-left: 1100px;">
+      <h2>Our Partners</h2>
+      <ul>
+        <li>Goibibo Bus</li>
+        <li>Goibibo Hotels</li>
+        <li>Makemytrip Hotels</li>
+      </ul>
+    </div>
+  </div>
+  
+  <hr>
+</div>
+<div class="container">
+  <p>©2024 Prasannabus India Pvt Ltd. All rights reserved</p>
+  <router-outlet></router-outlet>
+</div>

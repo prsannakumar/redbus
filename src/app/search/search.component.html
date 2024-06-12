@@ -1,0 +1,277 @@
+<div class="container-fluid">
+  <header class="d-flex p-2 justify-content-between bg-white text-white">
+      <div></div>
+      <div>
+          <img src="assets/busimagebgremove.png" alt="Bus Logo" style="height: 70px;width: 150px;">
+          <h1 style="color: red;display: inline;">Prasanna Bus</h1>
+      </div>
+      <div class="d-flex">
+          <a>
+              <img src="assets/coustemercare.jpg" alt="Customer Care" style="height: 40px;width: 40px; border-radius: 100%;">
+              <p style="margin-top: -25px; margin-left: 40px;color: black;">Help</p>
+          </a>
+          <div class="dropdown" style="margin-left: 70px;">
+              <button class="dropbtn" style="border-radius: 50px;">User</button>
+              <div class="dropdown-content">
+                  <a [routerLink]="['/login']">Login</a>
+                  <a [routerLink]="['/signup']">SignUp</a>
+              </div>
+          </div>
+      </div>
+      <div></div>
+  </header>
+
+  <div class="sticky">
+    <div class="search-bar-background sticky-top">
+        <div class="search-bar">
+            <div class="search-field from-field">
+                <i class="bi bi-bus-front"></i>
+                <input list="from-list" type="text" placeholder="From" [(ngModel)]="from">
+                <datalist id="from-list">
+                    <option value="Hyderabad">
+                    <option value="Bangalore">
+                    <option value="Mumbai">
+                    <option value="Chenai">
+                    <option value="Delhi">
+                </datalist>
+            </div>
+            <div class="switch-field">
+                <button class="btn" (click)="switch()"><i class="bi bi-arrow-left-right"></i></button>
+            </div>
+            <div class="search-field to-field">
+                <i class="bi bi-bus-front"></i>
+                <input list="from-list" type="text" placeholder="To" [(ngModel)]="to">
+                <datalist id="from-list">
+                    <option value="Hyderabad">
+                    <option value="Bangalore">
+                    <option value="Mumbai">
+                    <option value="Chenai">
+                    <option value="Delhi">
+                </datalist>
+            </div>
+            <div class="search-field date-field">
+                <i class="bi bi-calendar3"></i>
+                <input type="date" [(ngModel)]="date">
+            </div>
+            <a [routerLink]="['/search']"><button class="search-button" (click)="searchBuses()">SEARCH BUSES</button></a>
+        </div>
+    </div>
+
+    <div class="container sort-bar sticky-sort" style="background-color: aliceblue;">
+        <strong style="margin-top: 10px;">Sort By:</strong>
+        <a class="btn" (click)="sortBuslistByPrice()">Price</a>
+        <a class="btn">Seats</a>
+        <a class="btn" (click)="sortBuslistByRating()">Rating</a>
+        <a class="btn" (click)="sortBuslistByArrivaltime()">Arrival Time</a>
+        <a class="btn" (click)="sortBusByDeparturetime()">Departure Time</a>
+
+        <div class="vertical" style="height: 20px;border-left: 2px solid black;margin-top: 10px;display: inline;"></div>
+        <i class="bi bi-bus-front" style="margin-top: 10px; margin-left: 10px;display: inline;"></i>
+        <p style="margin-top: 10px;margin-left: 10px;color:red;display: inline;">Showing {{itemCount}} Buses on this route</p>
+    </div>
+
+    <div class="container main-content d-flex">
+        <div class="sidebar sticky-sidebar" style="width: 350px;background: #faf9f9;">
+            <div class="container">
+                <h3 style="margin-top: 20px;">Filters</h3>
+            </div>
+            <hr>
+            <div class="container justify-content-between" style="margin-top: 10px;background-color: antiquewhite;height: 50px;border-radius: 10px;">
+                <h4 style="display: inline-flex;">Price drop</h4> 
+                <input type="checkbox" style="margin-left: 200px;height: 20px;width: 20px;margin-top: 17px;">
+            </div>
+            <div style="margin-top: 10px;background-color: antiquewhite;height: 100px;border-radius: 10px;">
+                <h4 style="margin-left: 10px;">Bus Type</h4>
+                <button class="btn" (click)="filterTypeAc()" style="background-color: #faf9f9;margin-left: 10px;margin-top: px;">ac</button>
+                <button class="btn" (click)="filterTypeNonAc()" style="background-color: #faf9f9;margin-left: 10px;margin-top: px;">non ac</button>
+                <button class="btn" (click)="filterTypeSeater() " style="background-color: #faf9f9;margin-left: 10px;margin-top: px;">seater</button>
+                <button class="btn" (click)="filterTypeSleeper()" style="background-color: #faf9f9;margin-left: 10px;margin-top: px;">sleeper</button>
+            </div>
+            <div style="margin-top: 10px;background-color: antiquewhite;height: 70px;border-radius: 10px;">
+                <h4 style="margin-left: 10px;">Price Range</h4>
+                <p style="margin-left: 60px;display: inline;">450</p>
+                <input type="range" min="0" max="5" style="display: inline;margin-left: px;">2700
+            </div>
+            <div style="margin-top: 10px;background-color: antiquewhite;height: 200px;border-radius: 10px;">
+                <h4 style="margin-left: 10px;">Departure Time</h4>
+                <div>
+                    <button class="btn" (click)=" filterBusesBefore10AM()" style="height: 70px;width: 120px;background-color: #faf9f9;margin-left: 50px;">Before 10AM</button>
+                    <button class="btn" (click)=" filterBusesBetween10AMAnd5PM()" style="height: 70px;width: 120px;background-color: #faf9f9;margin-left: 10px;">10AM - 5PM</button>
+                </div>
+                <div style="margin-top: 10px;">
+                    <button class="btn" (click)=" filterBusesBetween5PMAnd11PM()" style="height: 70px;width: 120px;background-color: #faf9f9;margin-left: 50px;">5PM - 11PM</button>
+                    <button class="btn" (click)="filterBusesAfter11PM()" style="height: 70px;width: 120px;background-color: #faf9f9;margin-left: 10px;">After 11PM</button>
+                </div>
+            </div>
+        </div>
+        <div class="bus-list">
+            
+            <div *ngFor="let bus of filteredBusList" class="bus-item ">
+              <div class="d-flex">
+                <div>
+                <h1>BUS NO:{{bus.busno}}</h1>
+                <div class="justify-content-between d-flex" style="width: 700px;">
+                    <div></div>
+                    <div><h4>{{date}}</h4><h4>{{bus.arrivaltime}}</h4><h4 style="margin-top: -18px;">{{bus.startingpoint}}</h4></div>
+                    <div><p>Travel Time: {{ calculateTravelTime(bus.arrivaltime, bus.departuretime) }}</p></div>
+                    <div><h4>{{ calculateDepartureDate(date, bus.arrivaltime, bus.departuretime) }}{{departure | departureDate}}</h4><h4 >{{bus.departuretime}}</h4><h4 style="margin-top: -18px;">{{bus.dropingpoint}}</h4></div>
+                    <div></div>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between" >
+                    <div style="background-color: rgb(177, 249, 177);width: 40px;border-radius: 10px;"><span class="bi bi-star-fill text-warning"></span>{{bus.rating}}</div>
+                    <div>bus type:{{bus.type}}</div>
+                    <div></div>
+                </div>
+              </div> 
+              <div class="vertical" style="height: auto;border-left: 2px solid black;margin-top: 10px;display: inline;"></div>
+              <div style=" direction: rtl;margin-left: 20px;" >
+                <h4>Starting at</h4>
+                <h3 *ngIf="discount(bus)" ><s>{{bus.price | currency:'INR'}}</s></h3>
+               
+                <h3 ><strong>{{bus.price - discount(bus)|currency:'INR'}}</strong></h3>
+                <h3  *ngIf="discount(bus)">off:{{discount(bus)|currency:'INR'}}</h3>
+                
+                <button class="btn btn-danger" (click)="toggleSeats(bus)">show seats</button>
+              </div>
+              </div>
+              <div *ngIf="showSeatsFor === bus.busno" class="seats">
+                <p>Seat Information for Bus No: {{bus.busno}}</p>
+                <div style="margin-left: 50px;">
+                    <ng-container *ngIf="isSeater(bus); else sleeperView">
+                    <!-- Sleeper View -->
+                    <div>
+                        <h4>lower breth</h4>
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                      </div>
+                      <div>
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+              
+                      </div>
+                      <div style="height: 20px;"></div>
+                      <div>
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        
+                      </div>
+                     <div style="height: 50px;"></div>
+                     <h4>upper berth</h4>
+                     <div>
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        
+                      </div>
+                      <div>
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        
+                      </div>
+                      <div style="height: 20px;"></div>
+                      <div>
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        <img src="assets/sleeper.png" alt="">
+                        
+                      </div>
+                  </ng-container>
+                  <ng-template #sleeperView>
+                    <!-- Seater View -->
+                    <div>
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+              
+                      </div>
+                      <div>
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+              
+                      </div>
+                      <div style="height: 20px;"></div>
+                      <div>
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+              
+                      </div>
+                      <div>
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                        <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+                         <img src="assets/seat.png"  [ngClass]="{'booked': seat.isBooked, 'available': !seat.isBooked, 'selected': isSelected(seat)}"  (click)="toggleSeatSelection(seat)">
+              
+                      </div>
+                  
+                  </ng-template>
+                </div> 
+              </div>
+              
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+  </div>
+</div>

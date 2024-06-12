@@ -1,0 +1,24 @@
+<div class="container d-flex" style="margin-top: 50px; margin-left: 400px; height: 525px; width: 720px; background-color: antiquewhite;">
+    <div>
+        <img src="assets/signupbgimg.svg" alt="" style="margin-top: 5px;">
+        <h1 style="margin-top: -500px; color: aliceblue; margin-left: 10px;">Unlock the</h1>
+        <h1 style="margin-top: -25px; color: aliceblue; margin-left: 10px;">Smarter Way to Travel</h1>
+    </div>
+    <div style="margin-top: 100px;margin-left: 40px;">
+        <h1>Login here</h1>
+        <form (ngSubmit)="LoginDetails(registrationForm.value)" [formGroup]="registrationForm">
+        <dl>
+            <dt>UserName</dt>
+            <dd> <input type="text" class="form-control" name="userName" formControlName="userName"></dd>
+            <dt>Password</dt>
+            <dd> <input type="password" class="form-control" name="password" formControlName="password"></dd>
+            <button class="btn btn-danger" style="margin-left: 200px;" type="submit">Login</button>
+        </dl>
+        </form>
+        <div *ngIf="showmsg" style="color: red; margin-top: 20px;">
+            {{ showmsg }}
+        </div>
+        <h1 style="color: red; margin-top: 20px;">Sign in to avail exciting</h1>
+        <h1 style="color: red;">discounts and cashbacks!!</h1>
+    </div>
+</div>
